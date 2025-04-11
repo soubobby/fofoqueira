@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fofoqueira</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-color: black;
+        overflow: hidden;
+      }
+      #cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: url('frame.jpg') center center no-repeat;
+        background-size: contain;
+        background-color: black;
+        z-index: 10;
+        cursor: pointer;
+      }
+      @media (max-aspect-ratio: 4/5) {
+        #cover {
+          background-image: url('mobile.jpg');
+        }
+      }
+      #player {
+        width: 100vw;
+        height: 100vh;
+        z-index: 1;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cover" onclick="startVideo()"></div>
+    <div id="player"></div>
+
+    <script>
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      var player;
+
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '100%',
+          width: '100%',
+          videoId: 'uvC1Qg9jLKQ',
+          playerVars: {
+            autoplay: 1,
+            mute: 0,
+            start: 7,
+            controls: 0,
+            showinfo: 0,
+            rel: 0,
+            modestbranding: 1
+          }
+        });
+      }
+
+      function startVideo() {
+        document.getElementById('cover').style.display = 'none';
+        document.getElementById('player').style.display = 'block';
+        player.playVideo();
+      }
+    </script>
+  </body>
+</html>
